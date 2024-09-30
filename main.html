@@ -1,1 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    -->
+    <link rel="stylesheet" href="main.css">
+    <title>Text Only Logo Maker</title>
+</head>
+<body>
+    <div id="logo-container">
+        <div class="top-display">
+            <div class="top-display-inner">
+                <div id="content-label">Text Only Logo Maker</div>
 
+                <div id="logo-wrap">
+                    <div id="logo">
+                        <h1 id="logoText">Logo Text</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <form id="logo-form">
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="logoWidth">Width:</label>
+                    <div class="range-label">
+                        <span id="logoWidthValue">200</span> px
+                    </div>
+                    <input type="range" id="logoWidth" min="50" max="800" value="200">
+                </div>
+                <div class="right-group2">
+                    <label for="logoHeight">Height:</label>
+                    <div class="range-label">
+                        <span id="logoHeightValue">150</span> px
+                    </div>
+                    <input type="range" id="logoHeight" min="50" max="800" value="150">
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="size">Font Size:</label>
+                    <div class="range-label">
+                        <span id="sizeValue">30</span> px
+                    </div>
+                    <input type="range" id="size" min="8" max="100" value="30">
+                </div>
+                <div class="right-group2">
+                    <label for="zoom">Zoom:</label>
+                    <div class="range-label">
+                        <span id="zoomValue">1</span>
+                    </div>
+                    <input type="range" id="zoom" min="0.1" max="5" step="0.1" value="1">
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group">
+                    <label for="text">Logo Text:</label>
+                    <input type="text" id="text" placeholder="Logo text" required>
+                </div>
+                <div class="right-group">
+                    <label for="font">Font:</label>
+                    <select id="font"></select>
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group3">
+                    <label for="color">Text Color:</label>
+                    <div class="color-input">
+                        <input type="text" id="color" placeholder="color name, hex, or rgba">
+                        <input type="color" id="colorPicker">
+                    </div>
+                </div>
+                <div class="right-group3">
+                    <label for="bgColor">BG Color:</label>
+                    <div class="color-input">
+                        <input type="text" id="bgColor" placeholder="color name, hex, or rgba">
+                        <input type="color" id="bgColorPicker">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="textOpacity">Text Opacity:</label>
+                    <div class="range-label">
+                        <span id="textOpacityValue">100</span>%
+                    </div>
+                    <input type="range" id="textOpacity" min="0" max="100" value="100">
+                </div>
+                <div class="right-group2">
+                    <label for="bgOpacity">BG Opacity:</label>
+                    <div class="range-label">
+                        <span id="bgOpacityValue">100</span>%
+                    </div>
+                    <input type="range" id="bgOpacity" min="0" max="100" value="100">
+                </div>
+            </div>
+            
+            <div class="line-group checkboxes-wrap">
+                <div class="checkboxes">
+                    <label for="bold"><b>B</b></label>
+                    <input type="checkbox" id="bold">
+                </div>
+                <div class="checkboxes">
+                    <label for="italics" class="italics-label">I</label>
+                    <input type="checkbox" id="italics">
+                </div>
+                <div class="checkboxes">
+                    <label for="underline" class="underline-label">U</label>
+                    <input type="checkbox" id="underline">
+                </div>
+                <div class="checkboxes">
+                    <label for="overline" class="overline-label">O</label>
+                    <input type="checkbox" id="overline">
+                </div>
+                <div class="checkboxes">
+                    <label for="shadow" class="shadow-label">S</label>
+                    <input type="checkbox" id="shadow">
+                </div>
+                <div class="checkboxes">
+                    <label for="border" class="text-border-label">T</label>
+                    <input type="checkbox" id="border">
+                </div>
+                <div class="checkboxes">
+                    <label for="logoBorder" class="logo-border-label1"></label>
+                    <input type="checkbox" id="logoBorder">
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="rotateX">RotateX:</label>
+                    <div class="range-label">
+                        <span id="rotateValueX">0</span> deg
+                    </div>
+                    <input type="range" id="rotateX" min="0" max="180" value="0">
+                </div>
+                <div class="right-group2">
+                    <label for="rotateY">RotateY:</label>
+                    <div class="range-label">
+                        <span id="rotateValueY">0</span> deg
+                    </div>
+                    <input type="range" id="rotateY" min="0" max="180" value="0">
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="skewX">Skew X:</label>
+                    <div class="range-label">
+                        <span id="skewValueX">0</span> deg
+                    </div>
+                    <input type="range" id="skewX" min="0" max="180" value="0">
+                </div>
+                <div class="right-group2">
+                    <label for="skewY">Skew Y:</label>
+                    <div class="range-label">
+                        <span id="skewValueY">0</span> deg
+                    </div>
+                    <input type="range" id="skewY" min="0" max="180" value="0">
+                </div>
+            </div>
+    
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="borderSize"><span class="text-border-label">T</span> &nbsp; border size:</label>
+                    <div class="range-label">
+                        <span id="borderSizeValue">5</span> px
+                    </div>
+                    <input type="range" id="borderSize" min="1" max="100" value="5">
+                </div>
+                <div class="right-group2">
+                    <label for="logoBorderSize"><span class="logo-border-label"></span> &nbsp; border size:</label>
+                    <div class="range-label">
+                        <span id="logoBorderSizeValue">5</span> px
+                    </div>
+                    <input type="range" id="logoBorderSize" min="1" max="100" value="5">
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="borderRadius"><span class="text-border-label">T</span> &nbsp; border radius:</label>
+                    <div class="range-label">
+                        <span id="borderRadiusValue">0</span> %
+                    </div>
+                    <input type="range" id="borderRadius" min="0" max="50" value="0">
+                </div>
+                <div class="right-group2">
+                    <label for="logoBorderRadius"><span class="logo-border-label"></span> &nbsp; border radius:</label>
+                    <div class="range-label">
+                        <span id="logoBorderRadiusValue">0</span> %
+                    </div>
+                    <input type="range" id="logoBorderRadius" min="0" max="50" value="0">            
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="borderOffset"><span class="text-border-label">T</span> &nbsp; border offset:</label>
+                    <div class="range-label">
+                        <span id="borderOffsetValue">5</span> px
+                    </div>
+                    <input type="range" id="borderOffset" min="0" max="50" value="5">
+                </div>
+                <div class="right-group2">
+                    <label for="logoBorderOffset"><span class="logo-border-label"></span> &nbsp; border offset:</label>
+                    <div class="range-label">
+                        <span id="logoBorderOffsetValue">5</span> px
+                    </div>
+                    <input type="range" id="logoBorderOffset" min="0" max="50" value="5">
+                </div>
+            </div>
+            
+            <div class="line-group colours">
+                <div class="left-group3">
+                    <label for="borderColor"><span class="text-border-label">T</span> &nbsp; border color:</label>
+                    <div class="color-input">
+                        <input type="text" id="borderColor" placeholder="border color">
+                        <input type="color" id="borderColorPicker">
+                    </div>
+                </div>
+                <div class="right-group3">
+                    <label for="logoBorderColor"><span class="logo-border-label"></span> &nbsp; border color:</label>
+                    <div class="color-input">
+                        <input type="text" id="logoBorderColor" placeholder="border color">
+                        <input type="color" id="logoBorderColorPicker">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="line-group">
+                <div class="left-group2">
+                    <label for="shadowSize"><span class="shadow-label">S</span> &nbsp; size:</label>
+                    <div class="range-label">
+                        <span id="shadowSizeValue">5</span> px
+                    </div>
+                    <input type="range" id="shadowSize" min="0" max="20" value="5">            
+                </div>
+                <div class="right-group2">
+                    <label for="shadowDirection"><span class="shadow-label">S</span> &nbsp; direction:</label>
+                    <div class="range-label">
+                        <span id="shadowDirectionValue">0</span> deg
+                    </div>
+                    <input type="range" id="shadowDirection" min="0" max="360" value="0">  
+                </div>
+            </div>    
+            
+            <div>
+                <label for="shadowColor colours"><span class="shadow-label">S</span> &nbsp; color:</label>
+                <div class="color-input">
+                    <input type="text" id="shadowColor" placeholder="color name, hex, or rgba">
+                    <input type="color" id="shadowColorPicker">
+                </div>
+            </div>
+        </form>
+    
+        <button id="downloadBtn">Download Logo</button>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="colors.js"></script>
+    <script src="fonts.js"></script>
+    <script src="main.js" defer></script>
+</body>
+</html>
