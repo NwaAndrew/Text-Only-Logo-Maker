@@ -341,10 +341,6 @@ downloadBtn.addEventListener('click', function() {
     canvas.width = logoWidth;
     canvas.height = logoHeight;
 
-    // Set the clipping area
-    ctx.rect(0, 0, canvas.width, canvas.height);
-    ctx.clip();
-
     // Draw background
     const bgColor = bgParseColor(bgColorInput.value);
     ctx.fillStyle = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, ${bgOpacityInput.value / 100})`;
@@ -358,8 +354,8 @@ downloadBtn.addEventListener('click', function() {
     
     ctx.font = `${fontSize}px ${font}`;
     ctx.fillStyle = color;
-    ctx.textAlign = 'center'; // Adjust alignment as needed
-    ctx.textBaseline = 'middle'; // Adjust baseline as needed
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
 
     // Apply text shadow if enabled
     if (shadowCheckbox.checked) {
@@ -367,7 +363,7 @@ downloadBtn.addEventListener('click', function() {
         const shadowDirection = shadowDirectionInput.value;
         const shadowOffsetX = shadowSize * Math.cos(shadowDirection * (Math.PI / 180));
         const shadowOffsetY = shadowSize * Math.sin(shadowDirection * (Math.PI / 180));
-        
+
         ctx.shadowColor = parseColor(shadowColorInput.value);
         ctx.shadowOffsetX = shadowOffsetX;
         ctx.shadowOffsetY = shadowOffsetY;
@@ -376,18 +372,41 @@ downloadBtn.addEventListener('click', function() {
         ctx.shadowColor = 'transparent';
     }
 
+    // Apply transformations (skew, rotate)
+    ctx.save(); // Save the context before transformations
+    ctx.translate(logoWidth / 2, logoHeight / 2); // Move to center
+    ctx.transform(
+        1, skewInputX.value * Math.PI / 180, // Skew X
+        skewInputY.value * Math.PI / 180, 1, // Skew Y
+        0, 0
+    );
+    ctx.rotate(rotateInputX.value * Math.PI / 180); // Rotate X
+    ctx.rotate(rotateInputY.value * Math.PI / 180); // Rotate Y
+
     // Draw the text
-    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    ctx.fillText(text, 0, 0); // Draw centered text
+    ctx.restore(); // Restore context after transformations
 
     // Apply border if enabled
     if (borderCheckbox.checked) {
         const borderSize = borderSizeInput.value;
         const borderColor = parseColor(borderColorInput.value);
         const borderRadius = borderRadiusInput.value;
-        
+
         ctx.lineWidth = borderSize;
         ctx.strokeStyle = borderColor;
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.moveTo(borderRadius, 0);
+        ctx.lineTo(logoWidth - borderRadius, 0);
+        ctx.quadraticCurveTo(logoWidth, 0, logoWidth, borderRadius);
+        ctx.lineTo(logoWidth, logoHeight - borderRadius);
+        ctx.quadraticCurveTo(logoWidth, logoHeight, logoWidth - borderRadius, logoHeight);
+        ctx.lineTo(borderRadius, logoHeight);
+        ctx.quadraticCurveTo(0, logoHeight, 0, logoHeight - borderRadius);
+        ctx.lineTo(0, borderRadius);
+        ctx.quadraticCurveTo(0, 0, borderRadius, 0);
+        ctx.closePath();
+        ctx.stroke();
     }
 
     // Export the canvas as an image
