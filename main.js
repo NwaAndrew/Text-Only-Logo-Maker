@@ -20,8 +20,6 @@ const rotateInputY = document.getElementById('rotateY');
 const boldCheckbox = document.getElementById('bold');
 const italicsCheckbox = document.getElementById('italics');
 const shadowCheckbox = document.getElementById('shadow');
-const underlineCheckbox = document.getElementById('underline');
-const overlineCheckbox = document.getElementById('overline');
 const borderCheckbox = document.getElementById('border');
 const borderColorInput = document.getElementById('borderColor');
 const borderColorPicker = document.getElementById('borderColorPicker');
@@ -231,8 +229,6 @@ bgOpacityInput.addEventListener('input', function() {
 boldCheckbox.addEventListener('change', updateLogo);
 italicsCheckbox.addEventListener('change', updateLogo);
 shadowCheckbox.addEventListener('change', updateLogo);
-underlineCheckbox.addEventListener('change', updateLogo);
-overlineCheckbox.addEventListener('change', updateLogo);
 borderCheckbox.addEventListener('change', updateLogo);
 logoBorderCheckbox.addEventListener('change', updateLogo);
 
@@ -276,12 +272,6 @@ function updateLogo() {
     logoText.style.fontStyle = italicsCheckbox.checked ? `italic` : 'normal';
     logoText.style.textShadow = shadowCheckbox.checked ? `2px 2px 5px ${shadowColor}` : 'none';
     logoText.style.transform = `skewX(${skewX}deg) skewY(${skewY}deg) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    
-    // Apply text decoration
-    let textDecoration = [];
-    if (underlineCheckbox.checked) textDecoration.push('underline');
-    if (overlineCheckbox.checked) textDecoration.push('overline');
-    logoText.style.textDecoration = textDecoration.join(' ');
     
     // Set border styling
     if (borderCheckbox.checked) {
