@@ -325,93 +325,19 @@ function populateFonts() {
 // Call the function to populate the fonts
 populateFonts();
 
-// Download button 
+//Download button 
 downloadBtn.addEventListener('click', function() {
     if (textInput.value.trim() === '') {
         textInput.focus();
         return; 
-    }
+    } 
 
-    const logoWidth = parseInt(logoWidthInput.value);
-    const logoHeight = parseInt(logoHeightInput.value);
-    
-    // Create a new canvas
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = logoWidth;
-    canvas.height = logoHeight;
-
-    // Draw background
-    const bgColor = bgParseColor(bgColorInput.value);
-    ctx.fillStyle = `rgba(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, ${bgOpacityInput.value / 100})`;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Set text properties
-    const text = textInput.value || 'Logo Text';
-    const font = fontSelect.value;
-    const fontSize = sizeInput.value;
-    const color = parseColor(colorInput.value);
-    
-    ctx.font = `${fontSize}px ${font}`;
-    ctx.fillStyle = color;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    // Apply text shadow if enabled
-    if (shadowCheckbox.checked) {
-        const shadowSize = shadowSizeInput.value;
-        const shadowDirection = shadowDirectionInput.value;
-        const shadowOffsetX = shadowSize * Math.cos(shadowDirection * (Math.PI / 180));
-        const shadowOffsetY = shadowSize * Math.sin(shadowDirection * (Math.PI / 180));
-
-        ctx.shadowColor = parseColor(shadowColorInput.value);
-        ctx.shadowOffsetX = shadowOffsetX;
-        ctx.shadowOffsetY = shadowOffsetY;
-        ctx.shadowBlur = shadowSize;
-    } else {
-        ctx.shadowColor = 'transparent';
-    }
-
-    // Apply transformations (skew, rotate)
-    ctx.save(); // Save the context before transformations
-    ctx.translate(logoWidth / 2, logoHeight / 2); // Move to center
-    ctx.transform(
-        1, skewInputX.value * Math.PI / 180, // Skew X
-        skewInputY.value * Math.PI / 180, 1, // Skew Y
-        0, 0
-    );
-    ctx.rotate(rotateInputX.value * Math.PI / 180); // Rotate X
-    ctx.rotate(rotateInputY.value * Math.PI / 180); // Rotate Y
-
-    // Draw the text
-    ctx.fillText(text, 0, 0); // Draw centered text
-    ctx.restore(); // Restore context after transformations
-
-    // Apply border if enabled
-    if (borderCheckbox.checked) {
-        const borderSize = borderSizeInput.value;
-        const borderColor = parseColor(borderColorInput.value);
-        const borderRadius = borderRadiusInput.value;
-
-        ctx.lineWidth = borderSize;
-        ctx.strokeStyle = borderColor;
-        ctx.beginPath();
-        ctx.moveTo(borderRadius, 0);
-        ctx.lineTo(logoWidth - borderRadius, 0);
-        ctx.quadraticCurveTo(logoWidth, 0, logoWidth, borderRadius);
-        ctx.lineTo(logoWidth, logoHeight - borderRadius);
-        ctx.quadraticCurveTo(logoWidth, logoHeight, logoWidth - borderRadius, logoHeight);
-        ctx.lineTo(borderRadius, logoHeight);
-        ctx.quadraticCurveTo(0, logoHeight, 0, logoHeight - borderRadius);
-        ctx.lineTo(0, borderRadius);
-        ctx.quadraticCurveTo(0, 0, borderRadius, 0);
-        ctx.closePath();
-        ctx.stroke();
-    }
-
-    // Export the canvas as an image
-    const link = document.createElement('a');
-    link.download = 'logo.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+    html2canvas(logo).then(function(canvas) {
+        const link = document.createElement('a');
+        link.download = 'logo.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }).catch(function(error) {
+        alert('An error occurred');
+    });
 });
